@@ -26,7 +26,10 @@ export default function Input({
 }: InputProps) {
   return (
     <div>
-      <label className="block text-lg" htmlFor={id}>
+      <label
+        className="block text-lg"
+        htmlFor={id}
+      >
         {label}
         {description && (
           <span className="text-sm text-slate-200 block mb-1">
@@ -49,12 +52,11 @@ export default function Input({
       />
       <div className="min-h-8 mt-1">
         {errorMsg && (
-          <span className="text-red-500 text-sm block ">{errorMsg}</span>
+          <span className="text-red-500 text-sm block ">
+            {errorMsg}
+          </span>
         )}
       </div>
     </div>
   );
-}
-function setUpdatedDeal(arg0: (prev: any) => any) {
-  throw new Error('Function not implemented.');
 }
