@@ -2,6 +2,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { AddDealRoutes } from '@/types';
+import { usePathname } from 'next/navigation';
 
 const steps = [
   {
@@ -19,11 +20,17 @@ const steps = [
     route: 'step-three',
     link: AddDealRoutes.CONTACT_INFO,
   },
-  { title: 'Review', route: 'review', link: AddDealRoutes.REVIEW_DEAL },
+  {
+    title: 'Review',
+    route: 'review',
+    link: AddDealRoutes.REVIEW_DEAL,
+  },
 ];
 
 export default function StepNavigation() {
-  const currentPath = '';
+  const pathname = usePathname();
+  const currentPath = pathname?.split('/').pop();
+  console.log(currentPath);
 
   return (
     <div className="mb-12 mt-4 lg:mb-0 min-w-60">
@@ -62,7 +69,8 @@ export default function StepNavigation() {
                 'hidden text-white/75 transition-colors duration-200 group-hover:text-white lg:block',
                 {
                   'font-light': currentPath !== step.route,
-                  'font-semibold text-white': currentPath === step.route,
+                  'font-semibold text-white':
+                    currentPath === step.route,
                 }
               )}
             >
