@@ -12,6 +12,7 @@ export default function StepThreeForm() {
           id="contactName"
           type="text"
           required
+          minLength={5}
         />
         <Input
           label="Contact Email"
