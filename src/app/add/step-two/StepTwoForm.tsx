@@ -21,10 +21,10 @@ export default function StepTwoForm() {
       <div className="flex w-full flex-col gap-8 lg:max-w-[700px] ">
         <Input
           label="Coupon Code"
-          id="code"
+          id="coupon"
           type="text"
           required
-          errorMsg={serverErrors?.couponCode}
+          errorMsg={serverErrors?.coupon}
           minLength={5}
         />
         <Input
