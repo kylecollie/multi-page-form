@@ -1,6 +1,13 @@
 'use client';
 
-import { Children, createContext, useEffect, useState } from 'react';
+import {
+  Children,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import {
   newDealInitialValuesSchema,
   NewDealInitialValuesType,
@@ -41,6 +48,19 @@ export const AddDealContextProvider = ({
     readFromLocalStorage();
     setDataLoaded(true);
   }, []);
+
+  const writeToLocalStorage = useCallback(() => {
+    localStorage.setItem(
+      LOCAL_STORAGE_KEY,
+      JSON.stringify(newDealData)
+    );
+  }, [newDealData]);
+
+  useEffect(() => {
+    if (dataLoaded) {
+      writeToLocalStorage();
+    }
+  }, [newDealData, dataLoaded, writeToLocalStorage]);
 
   const readFromLocalStorage = () => {
     console.log('readFromLocalStorage');
@@ -93,3 +113,13 @@ export const AddDealContextProvider = ({
     </AddDealContext.Provider>
   );
 };
+
+export function useAddDealContext() {
+  const context = useContext(AddDealContext);
+  if (!context) {
+    throw new Error(
+      'useAddDealContext must be used within a AddDealContextProvider'
+    );
+  }
+  return context;
+}

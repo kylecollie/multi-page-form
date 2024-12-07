@@ -1,5 +1,7 @@
 'use client';
 
+import { useAddDealContext } from '@/contexts/addDealContext';
+
 interface InputProps {
   label: string;
   id: string;
@@ -24,6 +26,13 @@ export default function Input({
   description,
   errorMsg,
 }: InputProps) {
+  const { updateNewDealDetails, newDealData } = useAddDealContext();
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    updateNewDealDetails({ [e.target.name]: e.target.value });
+  };
+
   return (
     <div>
       <label
@@ -44,6 +53,8 @@ export default function Input({
         type={type}
         name={id}
         id={id}
+        onChange={handleInputChange}
+        defaultValue={newDealData[id]}
         required={required}
         pattern={pattern}
         minLength={minLength}
